@@ -28,6 +28,7 @@ User.create = (user, result) => {
             user.lastname,
             user.phone,
             user.image,
+            user.password,
             new Date(),
             new Date()
         ],

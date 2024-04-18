@@ -3,7 +3,12 @@ const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const logger = require('morgan')
-const cors = require('cors')
+const cors = require('cors');
+
+/**
+ * IMPORTAR RUTAS
+ */
+const usersRoutes = require('./routes/userRoutes')
 
 const port = process.env.PORT || 3000;
 
@@ -18,6 +23,11 @@ app.use(cors());
 app.disable('x-powered-by')
 
 app.set('port', port);
+
+/**
+ * LLAMADO DE LAS RUTAS
+ */
+usersRoutes(app)
 
 server.listen(3000, '192.168.1.69' || 'localhost', function() {
     console.log('Aplicación de NodeJS ' + port + " Iniciada...")
