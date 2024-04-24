@@ -8,6 +8,7 @@ module.exports = {
         User.create(user, (err,data) => {
             
             if(err){
+                console.log('ENTRO EN EL ERROR');
                 return res.status(501).json({
                     success: false,
                     message:'Hubo un error con el registro del usuario',
