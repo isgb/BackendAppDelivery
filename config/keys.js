@@ -1,3 +1,3 @@
 module.exports = {
-    secretOrKey: 
+    secretOrKey: 'hk86RFN7E8RDJTlrnFQpKGp53ByNPdb8' //256
 }
