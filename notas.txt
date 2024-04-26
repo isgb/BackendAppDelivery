@@ -9,3 +9,4 @@ npm i bcryptjs
 npm i passport
 npm i passport-jwt
 npm i jsonwebtoken
+npm i @react-native-async-storage/async-storage
