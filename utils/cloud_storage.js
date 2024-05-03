@@ -7,11 +7,11 @@ const uuid = uuidv4();
 
 
 const storage = new Storage({
-    projectId: "udemy-delivery-mysql",
+    projectId: "delivery-udemy-mysql-50411",
     keyFilename: './serviceAccountKey.json'
 });
 
-const bucket = storage.bucket("gs://udemy-delivery-mysql.appspot.com/");
+const bucket = storage.bucket("gs://delivery-udemy-mysql-50411.appspot.com/");
 
 /**
  * Subir el archivo a Firebase Storage
