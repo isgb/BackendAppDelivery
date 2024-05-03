@@ -109,12 +109,12 @@ module.exports = {
                 });
             }
 
-            user.id = data;
+            user.id = `${data}`;
 
             return res.status(201).json({
                 success: true,
                 message: 'El registro se realizo correctamente',
-                data: data // EL ID DEL NUEVO USUARIO
+                data: user // EL ID DEL NUEVO USUARIO
             });
 
         });
