@@ -10,3 +10,5 @@ npm i passport
 npm i passport-jwt
 npm i jsonwebtoken
 npm i @react-native-async-storage/async-storage
+npm i @google-cloud/storage
+npm i multer
