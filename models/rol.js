@@ -2,7 +2,7 @@ const db = require('../config/config');
 
 const Rol = {};
 
-Rol.create = (id_user, id_rol) => {
+Rol.create = (id_user, id_rol, result) => {
     const sql = `
     INSERT INTO
         user_has_roles(
@@ -17,17 +17,17 @@ Rol.create = (id_user, id_rol) => {
     db.query(
         sql,
         [id_user,id_rol, new Date(), new Date()],
-        (err, user) => {
+        (err, res) => {
             if(err){
                 console.log('Error:', err);
                 result(err, null);
             }
             else{
-                console.log('Usuario obtenido:', user[0]);
-                result(null, user[0]);
+                console.log('Usuario obtenido:', res.insertId);
+                result(null, res.insertId);
             }
         }
     )
 }
 
-import.exports = Rol;
+module.exports = Rol;
