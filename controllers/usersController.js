@@ -112,12 +112,13 @@ module.exports = {
                 });
             }
 
-            user.id = `${data}`;
+            // user.id = `${data}`;
             const token = jwt.sign({ id: user.id, email: user.email }, keys.secretOrKey, {})
             user.session_token = `JWT ${token}`;
+
             console.log("user id", user.id)
 
-            Rol.create(9, 3, (err,dataRol) => {
+            Rol.create(user.id, 3, (err,dataRol) => {
 
                 if (err) {
                     return res.status(501).json({
