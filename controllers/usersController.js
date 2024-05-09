@@ -101,8 +101,6 @@ module.exports = {
 
         User.create(user, (err, data) => {
 
-            console.log("TEST USUARIO", user);
-
             if (err) {
                 console.log('ENTRO EN EL ERROR');
                 return res.status(501).json({
@@ -112,11 +110,9 @@ module.exports = {
                 });
             }
 
-            // user.id = `${data}`;
+            user.id = `${data}`;
             const token = jwt.sign({ id: user.id, email: user.email }, keys.secretOrKey, {})
             user.session_token = `JWT ${token}`;
-
-            console.log("user id", user.id)
 
             Rol.create(user.id, 3, (err,dataRol) => {
 
