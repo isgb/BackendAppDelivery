@@ -69,7 +69,6 @@ User.findByEmail = (email, result) => {
             }
         }
     )
-
 }
 
 User.create = async (user, result) => {
