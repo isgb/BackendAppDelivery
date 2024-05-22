@@ -6,18 +6,37 @@ const User = {};
 User.findById = (id, result) => {
 
     const sql = `
-    SELECT
-        id,
-        email,
-        name,
-        lastname,
-        image,
-        phone,
-        password
-    FROM
-        users
-    WHERE
-        id = ?
+        SELECT
+            U.id,
+            U.email,
+            U.name,
+            U.lastname,
+            U.image,
+            U.phone,
+            U.password,
+            -- R.name as Roles
+            json_arrayagg(
+                json_object(
+                    'id', CONVERT(R.id, char),
+                    'name', R.name,
+                    'image', R.image,
+                    'router', R.route
+                )
+            ) as roles
+        FROM
+            users AS U
+        INNER JOIN 
+            user_has_roles AS UHR
+        ON
+            UHR.id_user = U.id
+        INNER JOIN 
+            roles AS R
+        ON
+            UHR.id_rol = R.id
+        WHERE
+            id = ?
+        GROUP BY
+            U.id
     `;
 
     db.query(
@@ -41,18 +60,36 @@ User.findById = (id, result) => {
 User.findByEmail = (email, result) => {
 
     const sql = `
-    SELECT
-        id,
-        email,
-        name,
-        lastname,
-        image,
-        phone,
-        password
-    FROM
-        users
-    WHERE
-        email = ?
+        SELECT
+                U.id,
+                U.email,
+                U.name,
+                U.lastname,
+                U.image,
+                U.phone,
+                U.password,
+                json_arrayagg(
+                    json_object(
+                        'id', CONVERT(R.id, char),
+                        'name', R.name,
+                        'image', R.image,
+                        'router', R.route
+                    )
+                ) as roles
+        FROM
+            users AS U
+        INNER JOIN 
+            user_has_roles AS UHR
+        ON
+            UHR.id_user = U.id
+        INNER JOIN 
+            roles AS R
+        ON
+            UHR.id_rol = R.id
+        WHERE
+            email = ?
+        GROUP BY
+            U.id
     `;
 
     db.query(
