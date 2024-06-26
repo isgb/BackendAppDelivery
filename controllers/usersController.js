@@ -50,7 +50,7 @@ module.exports = {
                     message: 'El usuario fue autentificado',
                     data: data // EL ID DEL NUEVO USUARIO
                 });
-            }else{
+            } else {
                 return res.status(401).json({
                     success: false,
                     message: 'El password es incorrecto',
@@ -85,17 +85,17 @@ module.exports = {
 
     },
 
-   async registerWithImage(req, res) {
+    async registerWithImage(req, res) {
 
         const user = JSON.parse(req.body.user); // CAPTURO LOS DATOS QUE ME ENVIE EL CLIENTE
 
         const files = req.files;
 
-        if(files.length > 0){
+        if (files.length > 0) {
             const path = `image_${Date.now()}`;
             const url = await storage(files[0], path);
 
-            if(url != undefined && url != null){
+            if (url != undefined && url != null) {
                 user.image = url;
             }
         }
@@ -115,7 +115,7 @@ module.exports = {
             const token = jwt.sign({ id: user.id, email: user.email }, keys.secretOrKey, {})
             user.session_token = `JWT ${token}`;
 
-            Rol.create(user.id, 3, (err,dataRol) => {
+            Rol.create(user.id, 3, (err, dataRol) => {
 
                 if (err) {
                     return res.status(501).json({
@@ -142,6 +142,65 @@ module.exports = {
 
         });
 
-    }
+    },
 
+    async updateWithImage(req, res) {
+
+        const user = JSON.parse(req.body.user); // CAPTURO LOS DATOS QUE ME ENVIE EL CLIENTE
+
+        const files = req.files;
+
+        if (files.length > 0) {
+            const path = `image_${Date.now()}`;
+            const url = await storage(files[0], path);
+
+            if (url != undefined && url != null) {
+                user.image = url;
+            }
+        }
+
+        User.update(user, (err, data) => {
+
+            if (err) {
+                console.log('ENTRO EN EL ERROR');
+                return res.status(501).json({
+                    success: false,
+                    message: 'Hubo un error con el registro del usuario',
+                    error: err
+                });
+            }
+
+            return res.status(201).json({
+                success: true,
+                message: 'El usuario se actualizo correctamente',
+                data: user // EL ID DEL NUEVO USUARIO
+            });
+
+        });
+    },
+
+    
+    async updateWithoutImage(req, res) {
+
+        const user = req.body; // CAPTURO LOS DATOS QUE ME ENVIE EL CLIENTE
+
+        User.updateWithoutImage(user, (err, data) => {
+
+            if (err) {
+                console.log('ENTRO EN EL ERROR');
+                return res.status(501).json({
+                    success: false,
+                    message: 'Hubo un error con el registro del usuario',
+                    error: err
+                });
+            }
+
+            return res.status(201).json({
+                success: true,
+                message: 'El usuario se actualizo correctamente',
+                data: user // EL ID DEL NUEVO USUARIO
+            });
+
+        });
+    },
 }
