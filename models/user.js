@@ -160,10 +160,10 @@ User.update = (user, result) => {
     UPDATE 
         users
     SET
-       name = ?
-       lastname = ?
-       phone = ?
-       image = ?
+       name = ?,
+       lastname = ?,
+       phone = ?,
+       image = ?,
        updated_at = ?
     WHERE
         id = ?
@@ -200,9 +200,9 @@ User.updateWithoutImage = (user, result) => {
     UPDATE 
         users
     SET
-       name = ?
-       lastname = ?
-       phone = ?
+       name = ?,
+       lastname = ?,
+       phone = ?,
        updated_at = ?
     WHERE
         id = ?

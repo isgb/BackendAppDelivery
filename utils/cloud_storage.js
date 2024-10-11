@@ -38,7 +38,6 @@ module.exports = (file, pathImage, deletePathImage) => {
             }
         }
 
-
         if (pathImage) {
             if (pathImage != null || pathImage != undefined) {
 
