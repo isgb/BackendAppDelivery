@@ -11,3 +11,12 @@ CREATE TABLE users(
     created_at timestamp(0) NOT NULL,
     updated_at timestamp(0) NOT NULL
 );
+
+CREATE TABLE categories(
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(180) NOT NULL,
+    description TEXT NOT NULL,
+    image VARCHAR(255) NULL,
+    created_at timestamp(0) NOT NULL,
+    updated_at timestamp(0) NOT NULL
+)
