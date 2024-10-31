@@ -1,6 +1,35 @@
 const db = require('../config/config');
 const Category = {};
 
+Category.getAll = (result) => {
+    const sql = `
+    SELECT 
+        id,
+        name,
+        description,
+        image
+    FROM
+        categories
+    ORDER BY
+        name
+    `;
+
+    db.query(
+        sql,
+        (err, data) => {
+            if(err){
+                console.log('Error:', err);
+                result(err, null);
+            }
+            else{
+                console.log('ID de la nueva categoria:', data);
+                result(null, data);
+            }
+        }
+    )
+
+}
+
 Category.create = (category, result) => {
 
     const sql = ` 
@@ -38,3 +67,5 @@ Category.create = (category, result) => {
     )
 
 };
+
+module.exports = Category;
