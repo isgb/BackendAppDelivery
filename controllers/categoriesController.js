@@ -53,4 +53,23 @@ module.exports = {
         });
 
     },
+
+    async delete(req,res){
+        const id = req.params.id;
+        Category.delete(id, (err, data) => {
+            if (err) {
+                return res.status(501).json({
+                    success: false,
+                    message: 'Hubo un error al momento de eliminar la categoria',
+                    error: err
+                });
+            }
+
+            return res.status(201).json({
+                success: true,
+                message: 'El categoria se elimino correctamente',
+                data: `${id}`
+            });
+        });
+    }
 }
