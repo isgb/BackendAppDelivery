@@ -42,7 +42,7 @@ usersRoutes(app, upload)
 categoriesRoutes(app, upload)
 
 //192.168.1.70 69
-server.listen(3000, '192.168.5.145' || 'localhost', function() {
+server.listen(3000, '192.168.100.156' || 'localhost', function() {
     console.log('Aplicación de NodeJS ' + port + " Iniciada...")
 })
 
