@@ -76,7 +76,7 @@ Category.update = (category, result) => {
             name = ?,
             description = ?,
             image = ?,
-            updated_at = ?,
+            updated_at = ?
         WHERE
             id = ?
     `;
