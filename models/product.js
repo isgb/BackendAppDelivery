@@ -30,6 +30,40 @@ const Product = {};
 
 // }
 
+
+Product.findByCategory = (id_category, result) => {
+    const sql = `
+        SELECT
+            P.id,
+            P.name,
+            P.description,
+            P.price,
+            P.image1,
+            P.image2,
+            P.image3,
+            P.id_category
+        FROM
+            products as P
+        WHERE
+            P.id_category = ?
+    `;
+
+    db.query(
+        sql,
+        [id_category],
+        (err, res) => {
+            if(err){
+                console.log('Error:', err);
+                result(err, null);
+            }
+            else{
+                console.log('ID del nuevo producto:', res);
+                result(null, res);
+            }
+        }
+    )
+}
+
 Product.create = (product, result) => {
 
     const sql = ` 
@@ -114,6 +148,30 @@ Product.update = (product, result) => {
             else{
                 console.log('ID del producto actualizado:', data.id);
                 result(null, data.id);
+            }
+        }
+    )
+}
+
+Product.delete = (id, result) => {
+    const sql = `
+        DELETE FROM
+            products
+        WHERE
+            id = ?
+    `;
+
+    db.query(
+        sql,
+        [id],
+        (err, data) => {
+            if(err){
+                console.log('Error:', err);
+                result(err, null);
+            }
+            else{
+                console.log('ID del producto eliminado:', id);
+                result(null, id);
             }
         }
     )

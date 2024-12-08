@@ -3,8 +3,11 @@ const storage = require("../utils/cloud_storage");
 const asyncForEach = require("../utils/async_foreach");
 
 module.exports = {
-  async getAll(req, res) {
-    Category.getAll((err, data) => {
+  async findByCategory(req, res) {
+
+    const id_category = req.params.id_category;
+
+    Product.findByCategory(id_category, (err, data) => {
       if (err) {
         console.log("ENTRO EN EL ERROR");
         return res.status(501).json({
@@ -51,10 +54,10 @@ module.exports = {
                 if(inserts === 0){
                     product.image1 = url;
                 }
-                else if(insert === 1){
+                else if(inserts === 1){
                     product.image2 = url;
                 }
-                else if(insert === 2){
+                else if(inserts === 2){
                     product.image3 = url;
                 }
             }
@@ -141,21 +144,23 @@ module.exports = {
   },
 
   async delete(req, res) {
+
     const id = req.params.id;
-    Category.delete(id, (err, data) => {
+
+    Product.delete(id, (err, id) => {
       if (err) {
+        console.log("ENTRO EN EL ERROR");
         return res.status(501).json({
           success: false,
-          message: "Hubo un error al momento de eliminar la categoria",
+          message: "Hubo un error al momento de eliminar el producto",
           error: err,
         });
       }
-
       return res.status(201).json({
         success: true,
-        message: "El categoria se elimino correctamente",
+        message: "El producto se elimino correctamente",
         data: `${id}`,
-      });
+      }); 
     });
   },
 };
